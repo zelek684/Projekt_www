@@ -21,16 +21,17 @@ from django.urls import path
 from django.urls import include, path
 from rest_framework import routers
 from Filmy import views
-from Filmy import urls
-from rest_framework.authtoken import views
 
+router = routers.DefaultRouter()
+router.register(r'users', views.UserViewSet)
+router.register(r'moje_filmy', views.FilmViewSet, basename='moje_filmy')
+router.register(r'recenzja', views.recenzjaViewSet, basename="recenzje")
+router.register(r'aktorzy', views.OsobaViewSet, basename="aktorzy")
 
-# Wire up our API using automatic URL routing.
-# Additionally, we include login URLs for the browsable API.
+#https://www.django-rest-framework.org/api-guide/routers/
+
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('Filmy/', include(urls)),
-    path('api-token-auth/', views.obtain_auth_token) #http://127.0.0.1:8000/api-token-auth/
+
+    path('', include(router.urls)),
 
 ]
-
